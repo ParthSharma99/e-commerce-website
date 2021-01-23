@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './Containers/App';
+
+import {Provider, connect} from 'react-redux';
+import {createStore,combineReducers, applyMiddleware} from 'redux';
+import {searchItems, requestItems, requestItemById, cartItems } from './reducers';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+
+
+const logger = createLogger() 
+const rootReducer = combineReducers({searchItems, requestItems, requestItemById, cartItems});
+
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,  
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
