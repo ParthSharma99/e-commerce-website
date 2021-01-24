@@ -1,6 +1,8 @@
 import './App.css';
 import ItemContainer from '../Components/ItemContainer';
 import {React, useState, useEffect} from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 import { connect } from 'react-redux';
 import { setSearchField, requestItems,addRemoveCart, requestItemById } from '../actions';
@@ -59,6 +61,7 @@ const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, ca
           (showCart 
             ? 
             <>
+            <span className="home-button noselect" onClick={() => setShowCart(false)}>Home <FontAwesomeIcon icon={faHome}/></span>
               <Cart cartItems={cartItems}  addRemoveCartItem={addRemoveCartItem}/>
             </>
             :
@@ -75,7 +78,11 @@ const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, ca
           
         }
       </div>
-      <span></span>
+      <span className="bg-circle circle-size1" style={{left:'7vw',top:'20vw'}}></span>
+      <span className="bg-circle circle-size3" style={{right:'10vw',top:'2vw'}}></span>
+      <span className="bg-circle circle-size2" style={{right:'5vw',bottom:'10vw'}}></span>
+      <span className="bg-circle circle-size3" style={{left:'8vw',top:'3vw'}}></span>
+      <span className="bg-circle circle-size1" style={{left:'25vw',bottom:'7vw'}}></span>
       
     </div>
   );

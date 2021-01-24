@@ -56,19 +56,49 @@ import * as constants from './constants';
   export const cartItems = (state=initialStateCart, action={}) => {
     switch (action.type) {
       case constants.ADD_ITEMS:
+        let idx = state.cartItems.indexOf(action.payload);
+        let temp = action.payload;
+        if(idx !== -1){
+          temp = state.cartItems[idx];
+          temp["count"]++;
+          return { 
+            ...state,
+            cartItems:  [
+              ...state.cartItems.slice(0,idx),
+              temp, 
+              ...state.cartItems.slice(idx+1)
+
+            ]
+          }
+        }
+        temp["count"] = 1;
         return { 
           ...state,
-          cartItems: [...state.cartItems, action.payload]
-       }
+          cartItems: [...state.cartItems, temp]
+        }
       case constants.REMOVE_ITEMS:
-        const idx = state.cartItems.indexOf(action.payload);
-        return { 
-          ...state,
-          cartItems: [
-            ...state.cartItems.slice(0,idx), 
-            ...state.cartItems.slice(idx+1)
-          ]
-       }
+        let remove_idx = state.cartItems.indexOf(action.payload);
+        let remove_temp = action.payload;
+        if(remove_temp["count"] > 1){
+          remove_temp["count"]--;
+          return { 
+            ...state,
+            cartItems: [
+              ...state.cartItems.slice(0,remove_idx), 
+              remove_temp,
+              ...state.cartItems.slice(remove_idx+1)
+            ]
+          }
+        }else{
+          return { 
+            ...state,
+            cartItems: [
+              ...state.cartItems.slice(0,remove_idx), 
+              ...state.cartItems.slice(remove_idx+1)
+            ]
+         }
+        }
+        
       default:
         return state
     }

@@ -1,10 +1,10 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import ItemContainer from "./ItemContainer";
 import CartItem from "./CartItem";
 
 const Cart = ({ cartItems, addRemoveCartItem }) => {
   return (
-    <div>
+    <div className="item-list-wrapper">
       {cartItems.map((user, i) => {
         return (
           <CartItem
