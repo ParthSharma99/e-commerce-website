@@ -51,6 +51,7 @@ import * as constants from './constants';
 
   const initialStateCart = {
     cartItems: [],
+    totalPrice: 0,
   }
 
   export const cartItems = (state=initialStateCart, action={}) => {
@@ -67,14 +68,15 @@ import * as constants from './constants';
               ...state.cartItems.slice(0,idx),
               temp, 
               ...state.cartItems.slice(idx+1)
-
-            ]
+            ],
+            totalPrice: state.totalPrice + temp["price"]
           }
         }
         temp["count"] = 1;
         return { 
           ...state,
-          cartItems: [...state.cartItems, temp]
+          cartItems: [...state.cartItems, temp],
+          totalPrice: state.totalPrice + temp["price"]
         }
       case constants.REMOVE_ITEMS:
         let remove_idx = state.cartItems.indexOf(action.payload);
@@ -87,7 +89,8 @@ import * as constants from './constants';
               ...state.cartItems.slice(0,remove_idx), 
               remove_temp,
               ...state.cartItems.slice(remove_idx+1)
-            ]
+            ],
+            totalPrice: state.totalPrice - remove_temp["price"]
           }
         }else{
           return { 
@@ -95,7 +98,8 @@ import * as constants from './constants';
             cartItems: [
               ...state.cartItems.slice(0,remove_idx), 
               ...state.cartItems.slice(remove_idx+1)
-            ]
+            ],
+            totalPrice: state.totalPrice - remove_temp["price"]
          }
         }
         

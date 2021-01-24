@@ -18,7 +18,8 @@ const mapStateToProps = (state) => {
     searchField: state.searchItems.searchField,
     items: state.requestItems.items,
     isPending: state.requestItems.isPending,
-    cartItems: state.cartItems.cartItems
+    cartItems: state.cartItems.cartItems,
+    totalPrice: state.cartItems.totalPrice
   }
 }
 
@@ -35,7 +36,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, cartItems,addRemoveCartItem, onRequestItemById }) => {
+const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, cartItems,addRemoveCartItem, totalPrice }) => {
 
   const [showCart, setShowCart] = useState(false);
 
@@ -62,7 +63,7 @@ const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, ca
             ? 
             <>
             <span className="home-button noselect" onClick={() => setShowCart(false)}>Home <FontAwesomeIcon icon={faHome}/></span>
-              <Cart cartItems={cartItems}  addRemoveCartItem={addRemoveCartItem}/>
+              <Cart cartItems={cartItems}  addRemoveCartItem={addRemoveCartItem} totalPrice={totalPrice}/>
             </>
             :
             <div class-name="search-item-wrapper" >

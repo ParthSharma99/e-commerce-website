@@ -221,3 +221,17 @@ button:focus {
     rgba(255, 255, 255, 0.1)
   );
 }
+
+.total-price {
+  background-color: rgba(106, 106, 105, 0.396);
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: white;
+  position: absolute;
+  right: 13vw;
+  bottom: 10vh;
+}
+.total-price span {
+  color: white;
+  font-weight: bold;
+}

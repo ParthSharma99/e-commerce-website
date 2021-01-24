@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import ItemContainer from "./ItemContainer";
 import CartItem from "./CartItem";
 
-const Cart = ({ cartItems, addRemoveCartItem }) => {
+const Cart = ({ cartItems, addRemoveCartItem, totalPrice }) => {
   return (
     <div className="item-list-wrapper">
       {cartItems.map((user, i) => {
@@ -14,6 +14,9 @@ const Cart = ({ cartItems, addRemoveCartItem }) => {
           />
         );
       })}
+      <span className="total-price">
+        Total Price : <span>$ {totalPrice}</span>
+      </span>
     </div>
   );
 };
