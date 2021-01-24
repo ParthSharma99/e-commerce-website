@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
-const ItemContainer = ({ item, addRemoveCartItem }) => {
+const CartItem = ({ item, addRemoveCartItem }) => {
   const countOccurences = (arr, val) => {
     return arr.reduce((acc, elem) => {
       return val === elem ? acc + 1 : acc;
@@ -27,9 +27,8 @@ const ItemContainer = ({ item, addRemoveCartItem }) => {
         <FontAwesomeIcon icon={faCartPlus} /> ${item.price}
         <sup className="in-cart-cnt">{cnt}</sup>
       </button>
-      {/* {cnt ? <span>In Cart : {cnt}</span> : <span>Not In Cart</span>} */}
     </div>
   );
 };
 
-export default ItemContainer;
+export default CartItem;

@@ -5,7 +5,6 @@ import * as constants from './constants';
 
 export const addRemoveCart = (mode,item) => (dispatch) => {
   
-  console.log(mode);
   if(mode === "ADD"){
     dispatch({type: constants.ADD_ITEMS, payload:item})
   }else if(mode === "REMOVE"){

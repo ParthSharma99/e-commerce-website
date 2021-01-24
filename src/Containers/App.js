@@ -8,6 +8,7 @@ import { setSearchField, requestItems,addRemoveCart, requestItemById } from '../
 import ItemList from '../Components/ItemList';
 import SearchBox from '../Components/SearchBox';
 import ErrorBoundry from '../Components/ErrorBoundary';
+import Cart from '../Components/Cart';
 
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
@@ -34,6 +35,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, cartItems,addRemoveCartItem, onRequestItemById }) => {
 
+  const [showCart, setShowCart] = useState(false);
+
   useEffect(()=>{
     onRequestItems();
   },[]);
@@ -49,20 +52,30 @@ const App = ({ items, searchField, onSearchChange, isPending, onRequestItems, ca
         {
           isPending ? 
           <div>
-            <h2>Loading...</h2>
+            <div className="loader"></div>
+            <h2 style={{color:"white"}}>Loading...</h2>
           </div> 
-          :
-          <div class-name="search-item-wrapper" >
-            <div className="search-box">
-              <SearchBox searchChange={onSearchChange} cartItems={cartItems}/>
+          : 
+          (showCart 
+            ? 
+            <>
+              <Cart cartItems={cartItems}  addRemoveCartItem={addRemoveCartItem}/>
+            </>
+            :
+            <div class-name="search-item-wrapper" >
+              <div className="search-box">
+                <SearchBox searchChange={onSearchChange} cartItems={cartItems} setShowCart={setShowCart}/>
+              </div>
+              <div className="item-container">
+                <ItemList items={filteredItems} addRemoveCartItem={addRemoveCartItem} cartItems={cartItems}/>
+              </div>
             </div>
-            <div className="item-container">
-              <ItemList items={filteredItems} addRemoveCartItem={addRemoveCartItem} cartItems={cartItems}/>
-            </div>
-          </div>
+            
+            )
+          
         }
       </div>
-      
+      <span></span>
       
     </div>
   );
